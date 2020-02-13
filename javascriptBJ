@@ -1,0 +1,135 @@
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>blackjack</title>
+        <script type="text/javascript">
+            document.write("Welcome to blackjack<br>")
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+        function setPage(){
+
+        }
+        function randInt(min,max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random()*(max-min))+min;
+        }
+            var suits = ["hearts", "clubs", "spades", "diamond"]
+            var vals = [11,2,3,4,5,6,7,8,9,10,10,10,10]
+            var names = ["ace","two","three",
+                        "four","five","six",
+                        "seven","eight","nine",
+                        "ten","jack","queen","king"]
+            var deck = [];
+            var yourVal = 0;
+            var cpuVal = 0;
+            var hit = false;
+            for(var i=0;i<suits.length;i++){
+                for(var j=0;j<vals.length;j++){
+                    deck.push({
+                        name: suits[i],
+                        value: vals[j]
+                    });
+                }
+            }
+
+            function yourSum(deck){
+                yourVal += deck.value;
+                return yourVal;
+            }
+            function cpuSum(deck){
+                cpuVal += deck.value;
+                return cpuVal;
+            }
+
+            function printCardInfo(deck){
+                return "" + deck.value +" of "+ deck.name
+            }
+
+            function pickCard(){
+                var random = randInt(0,51);
+                var picked = false;
+                while(picked==false){
+                    var temp = deck[random];
+                    if(temp==null){
+                        continue;
+                    }
+                    deck[random] = null;
+                    picked = true;
+                    yourSum(temp);
+                    return temp;
+                }
+            }
+
+            function pickCPUCard(){
+                var random = randInt(0,51);
+                var picked = false;
+                while(picked==false){
+                    var temp = deck[random];
+                    if(temp==null){
+                        continue;
+                    }
+                    deck[random] = null;
+                    picked = true;
+                    cpuSum(temp);
+                    return temp;
+                }
+            }
+
+            function hitAction(){
+                document.write("Your new card is " + printCardInfo(pickCard()) + " and your new value is " + yourVal  +"<br>")
+                if(yourVal>21){
+                    document.write("You went over. rip lol")
+                }
+                else if (yourVal>cpuVal) {
+                    document.write("You won woo")
+                }
+                else {
+                    document.write("L")
+                }
+            }
+
+            function stayAction(){
+                document.write("your value: "+ yourVal + " and the CPU's value: " + cpuVal+"<br>")
+                if(yourVal>21){
+                    document.write("You went over. rip lol")
+                }
+                else if (yourVal>cpuVal) {
+                    document.write("You won woo")
+                }
+                else {
+                    document.write("L")
+                }
+            }
+
+            document.write("your cards: " + printCardInfo(pickCard()) +
+            " and " + printCardInfo(pickCard()) + "<br>");
+            document.write("the CPU's cards: " +printCardInfo(pickCPUCard()) +" and an unknown card <br>");
+            pickCPUCard();
+            document.write("your current cards summed value: " + yourVal +"<br>")
+        </script>
+        <button onclick="hitAction()">Hit me</button>
+        <button onclick="stayAction()">Stay</button>
+    </body>
+
+    <style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+</style>
+
+<div class="footer">
+  <p>
+      <a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a>
+  </p>
+</div>
+
+</html>
