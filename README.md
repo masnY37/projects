@@ -4,13 +4,3 @@ goal: to make a working game of blackjack using javascript and html in order to 
 current state of project: majority of functionality is there, still working on the replay system
 
 
-
-
-
-
-
-
-
-
-
-leave
